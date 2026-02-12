@@ -31,9 +31,20 @@ Logowanie przez **OAuth2 + PKCE**.
 ## Wymagania
 - Python 3.9+
 - Konto developerskie Kick (Client ID + Client Secret)
+
+1. Zainstaluj wersję:
+
+```bash
+pyenv install 3.9.18
+pyenv local 3.9.18
+```
+
+2. Zainstaluj zależności:
+
 ```bash
 pip install requirements.txt
 ```
+
 
 ## Konfiguracja
 
