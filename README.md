@@ -42,7 +42,7 @@ pyenv local 3.9.18
 2. Zainstaluj zależności:
 
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 
