@@ -3,3 +3,4 @@ __pycache__/
 /.streamlit/
 /.pytest_cache/
 /*.pyc
+/tree.txt
