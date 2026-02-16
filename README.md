@@ -32,7 +32,7 @@ Logowanie przez **OAuth2 + PKCE**.
 - Python 3.9+
 - Konto developerskie Kick (Client ID + Client Secret)
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Konfiguracja
