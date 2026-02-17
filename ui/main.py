@@ -62,4 +62,3 @@ def run():
                 st.write(f"👥 Viewers: {ch.get('viewer_count')}")
                 st.write(f"🔴 Live: {ch.get('is_live')}")
                 st.divider()
-
