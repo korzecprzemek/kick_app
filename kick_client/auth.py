@@ -10,6 +10,11 @@ OAUTH_HOST = "https://id.kick.com"
 AUTHORIZE_URL = f"{OAUTH_HOST}/oauth/authorize"
 TOKEN_URL = f"{OAUTH_HOST}/oauth/token"
 
+client_id = os.getenv("KICK_CLIENT_ID")
+client_secret = os.getenv("KICK_CLIENT_SECRET")
+redirect_uri = os.getenv("KICK_REDIRECT_URI")
+
+
 def _base64url_encode(data: bytes) -> str:
     return base64.urlsafe_b64encode(data).rstrip(b"=").decode("ascii")
 
@@ -20,8 +25,6 @@ def generate_pkce_pair():
     return code_verifier,code_challenge
 
 def build_authorize_url():
-    client_id = os.getenv("KICK_CLIENT_ID")
-    redirect_uri = os.getenv("KICK_REDIRECT_URI")
     scope = "user:read channel:read"
 
     if not client_id or not redirect_uri:
@@ -42,9 +45,6 @@ def build_authorize_url():
     return url, code_verifier, state
 
 def exchange_code_for_token(code: str, code_verifier: str) -> dict:
-    client_id = os.getenv("KICK_CLIENT_ID")
-    client_secret = os.getenv("KICK_CLIENT_SECRET")
-    redirect_uri = os.getenv("KICK_REDIRECT_URI")
 
     if not client_id or not client_secret or not redirect_uri:
         raise RuntimeError("Brakuje KICK_CLIENT_ID / KICK_CLIENT_SECRET / KICK_REDIRECT_URI")
@@ -75,8 +75,6 @@ def exchange_code_for_token(code: str, code_verifier: str) -> dict:
     return payload
 
 def refresh_access_token(refresh_token: str) -> dict:
-    client_id = os.getenv("KICK_CLIENT_ID")
-    client_secret = os.getenv("KICK_CLIENT_SECRET")
 
     if not client_id or not client_secret:
         raise RuntimeError("Brakuje KICK_CLIENT_ID albo KICK_CLIENT_SECRET w env")
@@ -104,4 +102,3 @@ def refresh_access_token(refresh_token: str) -> dict:
         raise RuntimeError(f"Refresh failed: {r.status_code} {payload}")
 
     return payload
-
