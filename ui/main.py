@@ -1,6 +1,6 @@
 import streamlit as st
 from kick_client.auth import build_authorize_url, exchange_code_for_token, refresh_access_token
-from kick_client.data import get_me
+from kick_client.data import get_me, get_channels
 
 def _first(v):
     return v[0] if isinstance(v, list) else v
@@ -54,3 +54,12 @@ def run():
             st.session_state.token = new_token
 
             st.success("Odswiezone")
+        if st.button("Pobierz kanal Kick"):
+            with st.spinner("Pobieram dane z Kick API..."):
+                channels = get_channels(access_token, is_live = True, limit = 10)
+            for ch in channels.get("data", []):
+                st.subheader(ch["slug"])
+                st.write(f"👥 Viewers: {ch.get('viewer_count')}")
+                st.write(f"🔴 Live: {ch.get('is_live')}")
+                st.divider()
+
