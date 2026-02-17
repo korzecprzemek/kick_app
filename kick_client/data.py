@@ -3,7 +3,10 @@ import requests
 from typing import Optional, Dict, Any
 API_BASE = "https://api.kick.com/public/v1"
 
-def _get(path: str, access_token: str, params: Optional[Dict[str,Any]] = None ) -> dict:
+def _get(path: str,
+        access_token: str,
+        params: Optional[Dict[str,Any]] = None 
+        ) -> dict:
     r = requests.get(
         f"{API_BASE}{path}",
         headers={"Authorization": f"Bearer {access_token}"},
@@ -15,6 +18,7 @@ def _get(path: str, access_token: str, params: Optional[Dict[str,Any]] = None ) 
 
 def get_me(access_token: str) -> dict:
     return _get("/users", access_token)
+
 def get_channels(access_token: str,
                  user_id: Optional[int] = None,
                  slug: Optional[str] = None,
